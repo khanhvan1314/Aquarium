@@ -52,7 +52,7 @@ pipeline {
 
                 # Khởi chạy API bằng Uvicorn và ghi logs
                 echo "Starting API on port 8000..."
-                nohup /opt/anaconda3/bin/uvicorn deploy:app --host 0.0.0.0 --port 8000 > uvicorn.log 2>&1 &
+                nohup /opt/anaconda3/bin/uvicorn deploy:app --host 0.0.0.0 --port 8000 > uvicorn.log 2>&1 & disown
 
                 # Chờ 5 giây để API khởi động
                 sleep 5
@@ -68,6 +68,7 @@ pipeline {
                 '''
             }
         }
+
     }
 
     post {
