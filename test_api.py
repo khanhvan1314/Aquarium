@@ -37,4 +37,6 @@ def test_invalid_file():
     Kiểm tra khi gửi file không hợp lệ
     """
     response = client.post("/predict/json", files={"file": ("invalid.txt", b"This is not an image", "text/plain")})
-    assert response.status_code == 422  # HTTP 422 Unprocessable Entity
+    assert response.status_code == 400  # Đảm bảo phản hồi trả về HTTP 400
+    assert response.json() == {"error": "Invalid image file"}  # Đảm bảo thông báo lỗi chính xác
+
