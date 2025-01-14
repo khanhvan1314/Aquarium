@@ -42,32 +42,28 @@ pipeline {
         stage('Deploy API') {
             steps {
                 sh '''
-                # Tìm và dừng tiến trình trên cổng 8000 (nếu có)
-                if lsof -ti:8000; then
-                    echo "Killing process on port 8000..."
-                    lsof -ti:8000 | xargs kill -9
-                else
-                    echo "No process found on port 8000."
+                # Dừng API cũ nếu đang chạy
+                if screen -list | grep -q "api_server"; then
+                    screen -S api_server -X quit
+                    echo "Stopped old API session."
                 fi
 
-                # Khởi chạy API bằng Uvicorn và ghi logs
-                echo "Starting API on port 8000..."
-                nohup /opt/anaconda3/bin/uvicorn deploy:app --host 0.0.0.0 --port 8000 > uvicorn.log 2>&1 & disown
-
-                # Chờ 5 giây để API khởi động
+                # Tạo session mới và chạy API
+                echo "Starting API on port 8000 in screen session..."
+                screen -dmS api_server /opt/anaconda3/bin/uvicorn deploy:app --host 0.0.0.0 --port 8000
                 sleep 5
 
-                # Kiểm tra xem API có đang chạy hay không
+                # Kiểm tra API
                 if lsof -ti:8000; then
                     echo "API is running successfully on port 8000."
                 else
-                    echo "Failed to start API on port 8000. Check logs:"
-                    cat uvicorn.log
+                    echo "Failed to start API on port 8000."
                     exit 1
                 fi
                 '''
             }
-        }
+}
+
 
     }
 
