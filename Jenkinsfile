@@ -19,7 +19,9 @@ pipeline {
                     echo "Python3 is not installed. Please install Python3.";
                     exit 1;
                 fi
-                # Cài đặt các thư viện trực tiếp vào hệ thống
+
+                # Kích hoạt Anaconda và cài đặt dependencies
+                source /opt/anaconda3/bin/activate
                 pip install --upgrade pip setuptools
                 pip install -r requirements.txt
                 '''
