@@ -1,0 +1,7 @@
+fastapi         # Framework để xây dựng API
+uvicorn         # Máy chủ chạy FastAPI
+pillow          # Xử lý ảnh
+opencv-python # Vẽ bounding box lên ảnh
+numpy           # Xử lý dữ liệu số
+ultralytics     # YOLO (Ultralytics)
+pytest          # Thư viện kiểm thử (unit test)
