@@ -9,7 +9,7 @@ pipeline {
         // Stage 1: Clone Repository
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo/api-detection.git'  // Thay bằng URL repository của bạn
+                git 'https://github.com/khanhvan1314/Aquarium.git'  // Thay bằng URL repository của bạn
             }
         }
 

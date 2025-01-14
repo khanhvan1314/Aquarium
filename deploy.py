@@ -9,7 +9,7 @@ import numpy as np
 app = FastAPI()
 
 # Tải mô hình YOLO đã huấn luyện
-model = YOLO("runs/detect/train12/weights/best.pt")
+model = YOLO("best.pt")
 
 # API kiểm tra trạng thái
 @app.get("/")
