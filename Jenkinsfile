@@ -32,7 +32,8 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh '''
-                pytest test_api.py || exit 1  # Dừng pipeline nếu pytest thất bại
+                # Sử dụng đường dẫn đầy đủ tới pytest
+                /opt/anaconda3/bin/pytest test_api.py || exit 1
                 '''
             }
         }
