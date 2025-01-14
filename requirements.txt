@@ -5,3 +5,4 @@ opencv-python # Vẽ bounding box lên ảnh
 numpy           # Xử lý dữ liệu số
 ultralytics     # YOLO (Ultralytics)
 pytest          # Thư viện kiểm thử (unit test)
+httpx
