@@ -43,17 +43,16 @@ pipeline {
 
         // Stage 4: Deploy API
         stage('Deploy API') {
-            steps {
-                sh '''
-                if lsof -i:8000; then
-                    echo "Port 8000 is already in use. Please free the port or use a different one.";
-                    exit 1;
-                fi
-                source ${VENV_DIR}/bin/activate
-                nohup uvicorn deploy:app --host 0.0.0.0 --port 8000 &
-                '''
-            }
+    steps {
+        sh '''
+        # Tìm và dừng tiến trình trên cổng 8000 (nếu có)
+        lsof -ti:8000 | xargs kill -9 || true
+        source ${VENV_DIR}/bin/activate
+        nohup uvicorn deploy:app --host 0.0.0.0 --port 8000 &
+        '''
         }
+    }
+
     }
 
     post {
