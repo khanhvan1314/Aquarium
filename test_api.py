@@ -17,7 +17,7 @@ def test_predict_json():
     """
     Kiểm tra endpoint /predict/json với một ảnh hợp lệ
     """
-    with open("test_image.jpg", "rb") as file:  # Đảm bảo có một ảnh test (test_image.jpg)
+    with open("test_image1.jpg", "rb") as file:  # Đảm bảo có một ảnh test (test_image.jpg)
         response = client.post("/predict/json", files={"file": ("test_image.jpg", file, "image/jpeg")})
     assert response.status_code == 200
     assert "predictions" in response.json()
@@ -27,7 +27,7 @@ def test_predict_image():
     """
     Kiểm tra endpoint /predict/image với một ảnh hợp lệ
     """
-    with open("test_image.jpg", "rb") as file:  # Đảm bảo có một ảnh test (test_image.jpg)
+    with open("test_image1.jpg", "rb") as file:  # Đảm bảo có một ảnh test (test_image.jpg)
         response = client.post("/predict/image", files={"file": ("test_image.jpg", file, "image/jpeg")})
     assert response.status_code == 200
     assert response.headers["content-type"] == "image/jpeg"  # Đảm bảo phản hồi là ảnh
