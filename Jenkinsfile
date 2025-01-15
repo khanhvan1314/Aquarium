@@ -50,11 +50,11 @@ pipeline {
 
                 # Tạo session mới và chạy API
                 echo "Starting API on port 8000 in screen session..."
-                screen -dmS api_server /opt/anaconda3/bin/uvicorn deploy:app --host 0.0.0.0 --port 8000
+                screen -dmS api_server /opt/anaconda3/bin/uvicorn deploy:app --host 0.0.0.0 --port 8001
                 sleep 5
 
                 # Kiểm tra API
-                if lsof -ti:8000; then
+                if lsof -ti:8001; then
                     echo "API is running successfully on port 8000."
                 else
                     echo "Failed to start API on port 8000."
