@@ -100,7 +100,7 @@ model = YOLO("best.pt")
 
 @app.get("/")
 def read_root():
-    return {"message": "API phát hiện đối tượng đang chạy!"}
+    return {"message": "Aquarium Detection API is running!"}
 
 # Endpoint 1: Trả về dự đoán dưới dạng JSON
 @app.post("/predict/json")
@@ -109,7 +109,7 @@ async def predict_json(file: UploadFile = File(...)):
         contents = await file.read()
         image = Image.open(io.BytesIO(contents)).convert("RGB")
     except UnidentifiedImageError:
-        return JSONResponse(content={"error": "File ảnh không hợp lệ"}, status_code=400)
+        return JSONResponse(content={"error": "Invalid image file"}, status_code=400)
     
     results = model(image)
     predictions = []
@@ -130,7 +130,7 @@ async def predict_image(file: UploadFile = File(...)):
         contents = await file.read()
         image = Image.open(io.BytesIO(contents)).convert("RGB")
     except UnidentifiedImageError:
-        return JSONResponse(content={"error": "File ảnh không hợp lệ"}, status_code=400)
+        return JSONResponse(content={"error": "Invalid image file"}, status_code=400)
 
     results = model(image)
     image_np = np.array(image)
